@@ -1,0 +1,23 @@
+with order_items as (
+    select * from {{ ref('stg_sql_server_dbo__users') }}
+),
+
+cleaned as (
+    select
+          user_id
+        , first_name
+        , last_name
+        , email
+        , phone_number
+        , address_id
+        , created_at
+        , updated_at 
+        , coalesce(_fivetran_deleted, false)       as is_deleted
+        , _fivetran_synced                         as date_load
+        , _loaded_at
+    from users
+    where not is_deleted
+    qualify row_number() over (partition by order_item_id order by date_load desc) = 1
+)
+
+select * from cleaned
