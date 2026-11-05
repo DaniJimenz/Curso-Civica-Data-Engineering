@@ -6,7 +6,14 @@ sources:
     schema: google_sheets
     tables:
       - name: budget
-        columns:
+        columns: 
           - name: _row
             data_tests:
-              - not_null
+             - unique 
+             - not_null
+          - name: product_id
+            data_tests:
+              - relationships:
+                  arguments:
+                    to: ref('products')
+                    field: product_id
