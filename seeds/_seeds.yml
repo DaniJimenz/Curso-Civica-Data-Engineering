@@ -61,4 +61,5 @@ seeds:
           - accepted_values:
               arguments:
                 values: ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America']
+                
 >>>>>>> 1c2e3ad2707a3117656839a32e8198e526fe3ce1
