@@ -20,4 +20,4 @@ cleaned as (
     qualify row_number() over (partition by budget_id order by date_load desc) = 1
 )
 
-select * from cleaned
+select * from cleaned 
