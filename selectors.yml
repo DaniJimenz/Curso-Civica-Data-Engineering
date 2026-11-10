@@ -28,3 +28,11 @@ selectors:
         - exclude:
             - method: resource_type
               value: snapshot
+
+  - name: product
+    description: Todos los modelos de Silver (tag heredado de dbt_project.yml).
+    definition:
+      method: tag
+      value: product
+
+            
