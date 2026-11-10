@@ -45,7 +45,7 @@ models:
     #     almacenamiento y siempre reflejan Bronze.
     staging:
       +materialized: view
-      +database: DEV_BRONZE_DB
+      +database: DEV_SILVER_DB
       sql_server_dbo:
         +schema: sql_server_dbo
       google_sheets:
@@ -70,17 +70,17 @@ models:
         +materialized: view
         +schema: intermediate
       core:
-        +meta: 
-          owner: DBTDani
         +schema: core
-      marketing:
         +meta:
-          owner: DBTDani
+          owner: equipo-datos-core
+      marketing:
         +schema: marketing
+        +meta:
+          owner: equipo-marketing-analytics
       product:
-        +meta: 
-          owner: DBTDani
         +schema: product
+        +meta:
+          owner: equipo-producto
 
 # =============================================================================
 # Seeds
@@ -96,3 +96,14 @@ seeds:
         country_code: varchar(2)
         country_name: varchar(100)
         continent: varchar(50)
+
+# =============================================================================
+# Snapshots (día 5)
+# =============================================================================
+# Historial SCD2 en Silver. Nunca transient: un snapshot es la única copia de
+# la historia y no se puede reconstruir desde Bronze.
+snapshots:
+  curso_data_engineering:
+    +database: DEV_SILVER_DB
+    +schema: snapshots
+    +transient: false
