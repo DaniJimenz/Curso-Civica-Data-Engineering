@@ -1,4 +1,4 @@
-{{ config(materialized='ephemeral') }}
+{{ config(materialized='table') }}
 
 -- =============================================================================
 -- int_order_items__priced  ·  materialización ephemeral
