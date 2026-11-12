@@ -72,21 +72,44 @@ models:
       intermediate:
         +materialized: view
         +schema: intermediate
-      core:
-        +schema: core
-        +tags: ['core']
-        +meta:
-          owner: equipo-datos-core
-      marketing:
-        +schema: marketing
-        +tags: ['marketing']
-        +meta:
-          owner: equipo-marketing-analytics
-      product:
-        +schema: product
-        +tags: ['product']
-        +meta:
-          owner: equipo-producto
+        +access: public
+
+        # int_orders__enriched:
+        #   +group: core
+
+        # int_events__pivoted_by_session:
+        #   +group: product
+
+        # int_order_items__priced:
+        #   +group: product
+
+        core:
+          +schema: core
+          +tags: ['core']
+          +group: core
+          +grants:
+            select: ['REPORTING_ROLE']
+          #+access: public
+          +meta:
+            owner: equipo-datos-core
+        marketing:
+          +schema: marketing
+          +tags: ['marketing']
+          +group: marketing
+          +grants:
+            select: ['REPORTING_ROLE']
+          +access: public
+          +meta:
+            owner: equipo-marketing-analytics
+        product:
+          +schema: product
+          +tags: ['product']
+          +group: product
+          +grants:
+            select: ['REPORTING_ROLE']
+          +access: public
+          +meta:
+            owner: equipo-producto
 
 # =============================================================================
 # Seeds
